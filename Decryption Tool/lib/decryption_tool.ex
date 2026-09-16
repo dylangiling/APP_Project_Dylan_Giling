@@ -1,42 +1,15 @@
 defmodule Decryption_Tool do
 
-  def decrypt_message(language, message) do
-    "Message: " <> find_language(language, message)
-  end
-
-  defp find_language("a1z26", message) do
-    decrypt_a1z26(String.split(message, "-"), "")
-  end
-
-  defp find_language("atbash", message) do
-    decrypt_atbash(message, "")
-  end
-
-  defp find_language("a1z26_atbash", message) do
-    message = decrypt_a1z26(String.split(message, "-"), "")
-    decrypt_atbash(message, "")
-  end
-
-  defp find_language(_, _) do
-    "language not recognized"
-  end
-
-  def decrypt_a1z26([], decryption) do
-    decryption
-  end
-
-  def decrypt_a1z26(message, decryption) do
-    number = String.to_integer(List.first(message))
-    decrypt_a1z26(List.delete_at(message, 0), decryption <> Helper.number_to_letter(number))
-  end
-
-  def decrypt_atbash("", decryption) do
-    decryption
-  end
-
-  def decrypt_atbash(message, decryption) do
-    value = String.first(message)
-    decrypt_atbash(String.replace_leading(message, value, ""), decryption <> Helper.find_atbash_value(value))
+  # De main functie van het programma, vanuit hier wordt de logica van andere modules aangeroepen
+  # Roep de functie aan in de console met: Decryption_Tool.decrypt_message("Jouw String")
+  def decrypt_message(message) do
+    IO.puts(
+      "a1z26: " <> A1Z26.decrypt(message) <> "\n" <>
+      "atbash: " <> Atbash.decrypt(message) <> "\n" <>
+      "a1z26_atbash: " <> A1Z26_Atbash.decrypt(message) <> "\n" <>
+      "caesar: " <> Caesar.decrypt(message) <> "\n" <>
+      "rot47: " <> ROT47.decrypt(message)
+    )
   end
 
 end
