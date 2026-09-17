@@ -17,10 +17,10 @@ defmodule Caesar do
   end
 
   defp decrypt_caesar(message, decryption) do
-    # Variabele toegevoegd voor leesbaarheid. Hier wordt de eerste value van de huidige message gepakt
-    value = String.first(message)
+    # Eerst value gepakt, rest wordt bewaard en meegegeven aan de volgende recursie
+    {value, rest} = String.next_grapheme(message)
 
     # Door middel van recursion wordt message steeds kleiner en de decryption steeds groter
-    decrypt_caesar(String.replace_leading(message, value, ""), decryption <> Helper.find_caesar_value(value))
+    decrypt_caesar(rest, decryption <> Helper.find_caesar_value(value))
   end
 end

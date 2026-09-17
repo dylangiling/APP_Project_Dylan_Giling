@@ -17,11 +17,11 @@ defmodule Atbash do
   end
 
   defp decrypt_atbash(message, decryption) do
-    # Variabele toegevoegd voor leesbaarheid. Hier wordt de eerste value van de huidige message gepakt
-    value = String.first(message)
+    # Pak de eerste value en bewaar de rest
+    {value, rest} = String.next_grapheme(message)
 
     # Door middel van recursion wordt message steeds kleiner en de decryption steeds groter
-    decrypt_atbash(String.replace_leading(message, value, ""), decryption <> Helper.find_atbash_value(value))
+    decrypt_atbash(rest, decryption <> Helper.find_atbash_value(value))
   end
 
 
