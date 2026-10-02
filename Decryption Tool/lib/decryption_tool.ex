@@ -11,6 +11,9 @@ defmodule Decryption_Tool do
     )
   end
 
+  # Een variatie van de eerste functie, deze wordt aangeroepen als er een bepaalde sleutel wordt meegegeven
+  # De sleutel kan het aantal rotaties in caesar zijn, maar eventueel ook een daadwerkelijk wachtwoord voor vigenere.
+  # Roep de functie aan in de console met: Decryption_Tool.decrypt_message("Jouw String", 3) of Decryption_Tool.decrypt_message("Jouw String", "sleutel")
   def decrypt_message(message, key) do
     message = String.downcase(message)
     key = String.downcase(key)
