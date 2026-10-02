@@ -7,8 +7,16 @@ defmodule Decryption_Tool do
       "a1z26: " <> A1Z26.decrypt(message) <> "\n" <>
       "atbash: " <> Atbash.decrypt(message) <> "\n" <>
       "a1z26_atbash: " <> A1Z26_Atbash.decrypt(message) <> "\n" <>
-      "caesar: " <> Caesar.decrypt(message) <> "\n" <>
       "rot47: " <> ROT47.decrypt(message)
+    )
+  end
+
+  def decrypt_message(message, key) do
+    message = String.downcase(message)
+    key = String.downcase(key)
+    IO.puts(
+      "caesar: " <> Caesar.decrypt(message, key) <> "\n" <>
+      "vigenere: " <> Vigenere.decrypt(message, key)
     )
   end
 

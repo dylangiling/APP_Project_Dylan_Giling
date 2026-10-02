@@ -4,7 +4,7 @@ defmodule Atbash do
   # Basis Atbash decryptie
   def decrypt(message) do
     try do
-      decrypt_atbash(message, "")
+      decrypt_atbash(String.downcase(message), "")
     rescue
       # Wanneer er een character wordt meegegeven dat niet in het alfabet zit, wordt dit afgevangen
       ArgumentError -> "Not Atbash"

@@ -36,21 +36,43 @@ defmodule Helper do
   end
 
   # Wanneer een letter uit het alfabet wordt meegegeven, wordt de waarde van 3 plekken terug teruggegeven
-  def find_caesar_value(letter) when letter in @alphabet do
+  def find_caesar_value(letter, key) when letter in @alphabet do
     # Bepaal de positie van de letter die je zoekt
-    position = rem(26 + Enum.find_index(@alphabet, fn x -> x == letter end) - 3, 26)
+    position = rem(26 + Enum.find_index(@alphabet, fn x -> x == letter end) - key, 26)
 
     # Zoek de letter in het alfabet en geef deze terug
     Enum.at(@alphabet, position)
   end
 
   # Wanneer een spatie wordt meegegeven, wordt er ook een spatie teruggegeven
-  def find_caesar_value(" ") do
+  def find_caesar_value(" ", _key) do
     " "
   end
 
   # Wanneer een gegeven waarde niet in het alfabet zit, of een spatie is, wordt er een error gegeven
-  def find_caesar_value(_letter) do
+  def find_caesar_value(_letter, _key) do
     ArgumentError
   end
+
+  # Er wordt een letter en een key meegegeven. De letter die wordt teruggegeven is de letter geshift met de positie van de key.
+  def find_vigenere_value(letter, key) when letter in @alphabet and key in @alphabet do
+      shift = Enum.find_index(@alphabet, fn x -> x == key end)
+      position = rem(26 + Enum.find_index(@alphabet, fn x -> x == letter end) - shift, 26)
+      Enum.at(@alphabet, position)
+  end
+
+  # Wanneer een spatie wordt meegegeven krijg je ook een spatie terug
+  def find_vigenere_value(" ", _key) do
+    " "
+  end
+
+  # Wanneer een waarde niet herkent wordt is er een argument error
+  def find_vigenere_value(_letter, _key) do
+    ArgumentError
+  end
+
+  # Een functie die een waarde shift "world" wordt "orldw"
+  def shift_key(<<first, rest::binary>>) do
+      rest <> <<first>>
+    end
 end
