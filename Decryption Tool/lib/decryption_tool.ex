@@ -16,7 +16,6 @@ defmodule Decryption_Tool do
   # Roep de functie aan in de console met: Decryption_Tool.decrypt_message("Jouw String", 3) of Decryption_Tool.decrypt_message("Jouw String", "sleutel")
   def decrypt_message(message, key) do
     message = String.downcase(message)
-    key = String.downcase(key)
     IO.puts(
       "caesar: " <> Caesar.decrypt(message, key) <> "\n" <>
       "vigenere: " <> Vigenere.decrypt(message, key)

@@ -4,10 +4,11 @@ defmodule Vigenere do
   # Basis vigenere decryption
   def decrypt(message, key) do
     try do
-      decrypt_vigenere(message, key, "")
+      decrypt_vigenere(message, String.downcase(key), "")
     rescue
       # Wanneer er een character wordt meegegeven die niet in het alfabet zit kan het geen vigenere zijn
       ArgumentError -> "Not Vigenere"
+      FunctionClauseError -> "Not Vigenere"
     end
   end
 
